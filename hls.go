@@ -3,7 +3,6 @@ package minihls
 import (
 	"encoding/hex"
 	"errors"
-	"net/http"
 	netUrl "net/url"
 	"os"
 	"regexp"
@@ -15,18 +14,24 @@ import (
 )
 
 type HLS struct {
+	Header   map[string]string
 	indexUrl string
 	mainUrl  string
 	key      string
 	iv       string
-	cookies  []*http.Cookie
 }
 
 var client = minireq.NewClient()
 
-func (hls *HLS) userAgent() string {
-	UA := "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 Edg/103.0.1264.77"
-	return UA
+func (hls *HLS) headers() minireq.Headers {
+	h := minireq.Headers{
+		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 Edg/103.0.1264.77",
+	}
+
+	for k, v := range hls.Header {
+		h[k] = v
+	}
+	return h
 }
 
 func (hls *HLS) genHost(typ string) (string, error) {
@@ -56,8 +61,7 @@ func (hls *HLS) genHost(typ string) (string, error) {
 }
 
 func (hls *HLS) FilterHD(url string) (string, error) {
-	header := minireq.Headers{"user-agent": hls.userAgent()}
-	res, err := client.Get(url, header)
+	res, err := client.Get(url, hls.headers())
 	if err != nil {
 		return "", err
 	}
@@ -118,9 +122,7 @@ func (hls *HLS) filterKey() ([]byte, error) {
 		}
 		keyUrl = host + keyUrl
 	}
-
-	header := minireq.Headers{"user-agent": hls.userAgent()}
-	res, err := client.Get(keyUrl, header, hls.cookies)
+	res, err := client.Get(keyUrl, hls.headers())
 	if err != nil {
 		return nil, err
 	}
@@ -148,8 +150,7 @@ func (hls *HLS) filterIV() ([]byte, error) {
 }
 
 func (hls *HLS) FilterVideo(url string) ([]string, error) {
-	header := minireq.Headers{"user-agent": hls.userAgent()}
-	res, err := client.Get(url, header, hls.cookies)
+	res, err := client.Get(url, hls.headers())
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +158,6 @@ func (hls *HLS) FilterVideo(url string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	hls.cookies = res.Response.Cookies()
 	hdData := string(rawData)
 
 	keyRule := regexp.MustCompile(`URI="(.*)"`)
@@ -200,8 +200,7 @@ func (hls *HLS) Download(output string, videos []string) error {
 	defer videoFile.Close()
 
 	for _, video := range videos {
-		header := minireq.Headers{"user-agent": hls.userAgent()}
-		res, err := client.Get(video, header)
+		res, err := client.Get(video, hls.headers())
 		if err != nil {
 			return err
 		}
