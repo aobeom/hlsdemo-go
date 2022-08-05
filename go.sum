@@ -1,6 +1,6 @@
-github.com/aobeom/minireq/v2 v2.0.4 h1:/7gpPKr95WEbytea5Fgx1anZN36fjzP9ta3Ie3d9zc8=
-github.com/aobeom/minireq/v2 v2.0.4/go.mod h1:9PeA4J8C4oGw/qUPOrvOCRubbBd01JouUsb5DU7CeDM=
-github.com/aobeom/minitools v1.1.1 h1:OwNocvmWt6AifX+l0y2Vc7kNvTyqjtonG9mShp4abgk=
-github.com/aobeom/minitools v1.1.1/go.mod h1:IA4WAQnFIjpdqSJSAjU28JvPzTMbkXy2db4RRy3sVE0=
+github.com/qmaru/minireq/v2 v2.0.5 h1:1TC2VRPEEf9qIkF2uzjvQ+ITCEaybLJ0TtoqF2EAbBo=
+github.com/qmaru/minireq/v2 v2.0.5/go.mod h1:U0JrJ4bilKy0Dqhdz1kV2FSLjr8+dEK0xmXq1F2uRQI=
+github.com/qmaru/minitools v1.1.2 h1:5BTowdeyC5OBcP88dgzSDddMj5DZPWvbweFVHEwMElo=
+github.com/qmaru/minitools v1.1.2/go.mod h1:/ypakQ7RCYvMhOJQzpnwiKBL8Z/L9F5FOH+qJAumbHI=
 golang.org/x/net v0.0.0-20211208012354-db4efeb81f4b h1:MWaHNqZy3KTpuTMAGvv+Kw+ylsEpmyJZizz1dqxnu28=
 golang.org/x/net v0.0.0-20211208012354-db4efeb81f4b/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=

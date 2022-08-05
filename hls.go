@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/aobeom/minireq/v2"
-	"github.com/aobeom/minitools"
+	"github.com/qmaru/minireq/v2"
+	"github.com/qmaru/minitools"
 )
 
 type HLS struct {
