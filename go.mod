@@ -3,8 +3,8 @@ module github.com/qmaru/minihls
 go 1.18
 
 require (
-	github.com/qmaru/minireq/v2 v2.0.5
-	github.com/qmaru/minitools v1.1.2
+	github.com/qmaru/minireq/v2 v2.0.7
+	github.com/qmaru/minitools v1.2.0
 )
 
-require golang.org/x/net v0.0.0-20211208012354-db4efeb81f4b // indirect
+require golang.org/x/net v0.7.0 // indirect
