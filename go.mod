@@ -7,4 +7,4 @@ require (
 	github.com/qmaru/minitools v1.2.0
 )
 
-require golang.org/x/net v0.7.0 // indirect
+require golang.org/x/net v0.17.0 // indirect

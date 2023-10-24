@@ -3,6 +3,7 @@ package minihls
 import (
 	"encoding/hex"
 	"errors"
+	"io"
 	netUrl "net/url"
 	"os"
 	"regexp"
@@ -25,7 +26,7 @@ var client = minireq.NewClient()
 
 func (hls *HLS) headers() minireq.Headers {
 	h := minireq.Headers{
-		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 Edg/103.0.1264.77",
+		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.61",
 	}
 
 	for k, v := range hls.Header {
@@ -213,7 +214,7 @@ func (hls *HLS) Download(output string, videos []string) error {
 			return err
 		}
 
-		offset, err := videoFile.Seek(0, os.SEEK_END)
+		offset, err := videoFile.Seek(0, io.SeekEnd)
 		if err != nil {
 			return err
 		}
